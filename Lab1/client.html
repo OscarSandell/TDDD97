@@ -5,7 +5,89 @@
     <link href="client.css" type="text/css" rel="stylesheet">
     <script src="client.js" type="text/javascript"></script>
     <script src="serverstub.js" type="text/javascript"></script>
-
+    <script type="text/view" id="welcomeview">
+        <div class="wrapper">
+            <div class="main-div">
+                <div class="logo">
+                    <img src="wimage.png" alt="Twidder Logo" />
+                </div>
+                <div class="login">
+                    <form onSubmit="return validateLogin()" >
+                        <div class="form-item">
+                            <label for="username">Email</label>
+                            <input name="username" type="Email" required>
+                        </div>
+                        <div class="form-item">
+                            <label for="password">Password:</label>
+                            <input name="password" type="password" required>
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="Login">
+                        </div>
+                    </form>
+                </div>
+                <div class="signup">
+                    <form>
+                        <h4>Sign up here</h4>
+    
+                        <div class="form-item">
+                            <label for="FirsName">First name</label>
+                            <input name="FirstName" type="text" required>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="Family Name">Family name</label>
+                            <input name="Family Name" type="text" required>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="Gender">Gender</label>
+                            <select id="Gender" name="Genders">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Apache Helicopter">Apache Helicopter</option>
+                                <option value="Other">Other</option>
+    
+                            </select>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="City">City</label>
+                            <input name="City" type="text" required>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="Country">Country:</label>
+                            <input name="Country" type="text" required>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="Email">Email:</label>
+                            <input name="Email" type="email" required>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="Password">Password</label>
+                            <input name="Password" type="password" required>
+                        </div>
+    
+                        <div class="form-item">
+                            <label for="RepPassword">Repeat PSW:</label>
+                            <input name="RepPassword" type="password" required>
+                        </div>
+    
+                        <div class="submit">
+                            <input type="submit" value="SignUp">
+                        </div>
+    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/view" id="profileview">
+        Hello world!
+    </script>
 
     <title>
         Twidder
@@ -15,83 +97,8 @@
 
 
 <body>
-    <div class="wrapper">
-        <div class="main-div">
-            <div class="logo">
-                <img src="wimage.png" alt="Twidder Logo" />
-            </div>
-            <div class="login">
-                <form>
-                    <div class="form-item">
-                        <label for="username">Email</label>
-                        <input name="username" type="text" required>
-                    </div>
-                    <div class="form-item">
-                        <label for="password">Password:</label>
-                        <input name="password" type="password" required>
-                    </div>
-                    <div class="submit">
-                        <input type="submit" value="Login">
-                    </div>
-                </form>
-            </div>
-            <div class="signup">
-                <form>
-                    <h4>Sign up here</h4>
-
-                    <div class="form-item">
-                        <label for="FirsName">First name</label>
-                        <input name="FirstName" type="text" required>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="Family Name">Family name</label>
-                        <input name="Family Name" type="text" required>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="Gender">Gender</label>
-                        <select id="Gender" name="Genders">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Apache Helicopter">Apache Helicopter</option>
-                            <option value="Other">Other</option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="City">City</label>
-                        <input name="City" type="text" required>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="Country">Country:</label>
-                        <input name="Country" type="text" required>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="Email">Email:</label>
-                        <input name="Email" type="email" required>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="Password">Password</label>
-                        <input name="Password" type="password" required>
-                    </div>
-
-                    <div class="form-item">
-                        <label for="RepPassword">Repeat PSW:</label>
-                        <input name="RepPassword" type="password" required>
-                    </div>
-
-                    <div class="submit">
-                        <input type="submit" value="SignUp">
-                    </div>
-
-                </form>
-            </div>
-        </div>
+    <div id="view">
+        
     </div>
 </body>
 
