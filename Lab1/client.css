@@ -1,0 +1,79 @@
+body {
+    background-color: #6998ce;
+}
+
+.wrapper {
+    display: flex; 
+    justify-content: center; 
+    /* align-items: center; */
+    margin-top: 100px;
+}
+
+.main-div {
+    display: grid;
+    grid-template-columns: [col-first] 340px [col-second] 10px [col-third] 250px [col-fourth]; 
+    grid-template-rows: [row-first] 150px [row-second] 8px [row-third] 242px [row-fourth];
+}
+
+.logo {
+    grid-column-start: col-first;
+    grid-column-end: col-second;
+    grid-row-start: row-first;
+    grid-row-end: span row-fourth;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.login {
+    grid-column-start: col-third;
+    grid-column-end: col-fourth;
+    grid-row-start: row-first;
+    grid-row-end: row-second;
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.signup {
+    grid-column-start: col-third;
+    grid-column-end: col-fourth;
+    grid-row-start: row-third;
+    grid-row-end: row-fourth;
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+}
+
+form {
+    display: flex;
+    height:100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+.form-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit {
+    display: flex;
+    justify-content: end;
+}
+
+select {
+    width: 149px;
+}
+
+h4 {
+    margin: 8px 0;
+    text-align: center;
+}
+
+img {
+    width:336px;
+    height:396px;
+}
+
+
