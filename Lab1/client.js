@@ -5,14 +5,72 @@ displayView = () => {
 
 };
 
-window.onload = () => {
-    // window.alert("Hello TDDD97!");
+wallPost = (writer, content) => {
+    return (`
+        <li >
+            <div class="wallmessage">
+                <div id="messageWriter">
+                    ${writer}
+                </div>
+                <div id="messageContent">
+                    ${content}
+                </div>
+            </div>
+        </li>
+    `)
+}
 
-    var token = localStorage.getItem("token");
+home_content = () => {
+    let profileInfo = document.getElementById("profileinfo").getElementsByTagName("p");
+    let token = localStorage.getItem("token");
+
+    let userData = serverstub.getUserDataByToken(token);
+    for (let p of profileInfo) {
+        p.childNodes[0].data = p.childNodes[0].data + ": " + userData.data[p.childNodes[0].data];
+        p.childNodes[0].data = p.childNodes[0].data[0].toUpperCase() + p.childNodes[0].data.substring(1);
+        console.log(p.childNodes[0].data);
+    }
+
+    updateWall();
+
+}
+
+let dict = { "Home": home_content };
+
+newPost = () => {
+    let postarea = document.getElementById("postarea");
+    let token = localStorage.getItem("token");
+    let email = serverstub.getUserDataByToken(token).data.email;
+    //NOTE
+    //This is where SQL injections might happen
+    let postreturn = serverstub.postMessage(token, postarea.value, email);
+    if (postreturn.success) {
+        postarea.value = "";
+        updateWall();
+    }
+    //TODO lägg till en errordiv bredvid postknappen, säg till om posten faila
+}
+
+updateWall = () => {
+    let messages = serverstub.getUserMessagesByToken(localStorage.getItem("token")).data;
+    if (messages != null) {
+        let list = document.getElementById("messages");
+        let newWallListHtml = "";
+        for (message of messages) {
+            let wallPostHtml = wallPost(message.writer,message.content);
+            newWallListHtml += wallPostHtml;
+        }
+        list.innerHTML = newWallListHtml;
+    }
+}
+
+
+window.onload = () => {
+    let token = localStorage.getItem("token");
     if (token != null) {
         //uncomment this later
         changeView("profileview");
-        var activetab = localStorage.getItem("activetab");
+        let activetab = localStorage.getItem("activetab");
         if (activetab != null) {
             changeContent(activetab);
         }
@@ -29,7 +87,7 @@ window.onload = () => {
 };
 
 signout = () => {
-    var token = localStorage.getItem("token");
+    let token = localStorage.getItem("token");
     if (token != null) {
         localStorage.removeItem("token");
         localStorage.removeItem("activetab");
@@ -43,36 +101,42 @@ changeContent = (tab) => {
 
 
     //Change color of old active tab back to "unselected"
-    var old_tab = document.getElementById(localStorage.getItem("activetab").toLowerCase() + "Tab");
+    let old_tab = document.getElementById(localStorage.getItem("activetab").toLowerCase() + "Tab");
     old_tab.style.backgroundColor = "black";
     old_tab.style.color = "white";
 
     //Change color of new active tab to "selected"
-    var tabItem = document.getElementById(tab.toLowerCase() + "Tab");
+    let tabItem = document.getElementById(tab.toLowerCase() + "Tab");
     tabItem.style.backgroundColor = "gray";
     tabItem.style.color = "black";
 
     //Change active tab to new tab
     localStorage.setItem("activetab", tab);
 
-    var htmlView = document.getElementById(tab);
-    var oldView = document.getElementById("content");
+    let htmlView = document.getElementById(tab);
+    let oldView = document.getElementById("content");
     oldView.innerHTML = htmlView.innerHTML;
+    try {
+        dict[tab]();
+
+    } catch {
+        console.log("errororor");
+    }
 
 }
 
 changeView = (newView) => {
-    var htmlView = document.getElementById(newView);
-    var oldView = document.getElementById("view");
+    let htmlView = document.getElementById(newView);
+    let oldView = document.getElementById("view");
 
     oldView.innerHTML = htmlView.innerHTML;
 };
 
 changePassword = () => {
 
-    var oldpassword = document.getElementById("oldpassword").value;
-    var newpassword = document.getElementById("newpassword").value;
-    var repeatnewpassword = document.getElementById("repeatnewpassword").value;
+    let oldpassword = document.getElementById("oldpassword").value;
+    let newpassword = document.getElementById("newpassword").value;
+    let repeatnewpassword = document.getElementById("repeatnewpassword").value;
 
     if (newpassword != repeatnewpassword) {
         //Skriv någon feedback till användaren på sidan.
@@ -93,8 +157,8 @@ changePassword = () => {
     }
 
 
-    var token = localStorage.getItem("token");
-    var responsefromserver = serverstub.changePassword(token, oldpassword, newpassword)
+    let token = localStorage.getItem("token");
+    let responsefromserver = serverstub.changePassword(token, oldpassword, newpassword)
     displayErrorMessage("changePasswordError", responsefromserver.message);
 
 }
@@ -102,13 +166,13 @@ changePassword = () => {
 
 
 validateLogin = () => {
-    var username = document.getElementsByName("username")[0];
-    var password = document.getElementsByName("password")[0];
+    let username = document.getElementsByName("username")[0];
+    let password = document.getElementsByName("password")[0];
 
 
     if (!check_email(username.value)) {
         //Skriv någon feedback till användaren på sidan.
-        var errorDiv = document.getElementById("loginError");
+        let errorDiv = document.getElementById("loginError");
         errorDiv.innerHTML = "Invalid email adress.";
         console.log("Invalid email adress");
         return;
@@ -117,14 +181,14 @@ validateLogin = () => {
     if (password.value.length < passwordLength) {
         //Skriv någon feedback till användaren på sidan.
         console.log(`The password must be longer than ${passwordLength} characters.`);
-        var errorDiv = document.getElementById("loginError");
+        let errorDiv = document.getElementById("loginError");
         errorDiv.innerHTML = `Password is to short, should be ${passwordLength} long.`;
         return;
     }
 
-    var response_from_server = serverstub.signIn(username.value, password.value);
+    let response_from_server = serverstub.signIn(username.value, password.value);
     if (!response_from_server.success) {
-        var errorDiv = document.getElementById("loginError");
+        let errorDiv = document.getElementById("loginError");
         errorDiv.innerHTML = response_from_server.message;
         return;
     }
@@ -138,15 +202,15 @@ validateLogin = () => {
 
 validateSignup = () => {
     //firstname
-    var firstname = document.getElementsByName("firstname")[0];
+    let firstname = document.getElementsByName("firstname")[0];
     //familyname
-    var familyname = document.getElementsByName("familyname")[0];
-    var gender = document.getElementsByName("gender")[0];
-    var password = document.getElementsByName("password")[1];
-    var repeated_password = document.getElementsByName("repeatedpassword")[0];
-    var email = document.getElementsByName("email")[0];
-    var city = document.getElementsByName("city")[0];
-    var country = document.getElementsByName("country")[0];
+    let familyname = document.getElementsByName("familyname")[0];
+    let gender = document.getElementsByName("gender")[0];
+    let password = document.getElementsByName("password")[1];
+    let repeated_password = document.getElementsByName("repeatedpassword")[0];
+    let email = document.getElementsByName("email")[0];
+    let city = document.getElementsByName("city")[0];
+    let country = document.getElementsByName("country")[0];
 
 
     if (password.value != repeated_password.value) {
@@ -176,7 +240,7 @@ validateSignup = () => {
         return;
     }
 
-    var signupInfo = {
+    let signupInfo = {
         email: email.value,
         password: password.value,
         firstname: firstname.value,
@@ -187,7 +251,7 @@ validateSignup = () => {
     };
 
     //Communicate with backend
-    var response_from_server = serverstub.signUp(signupInfo);
+    let response_from_server = serverstub.signUp(signupInfo);
     if (!response_from_server.success) {
         console.log("Failed!");
         console.log(response_from_server.message);
@@ -203,6 +267,6 @@ check_email = (email) => {
 }
 
 displayErrorMessage = (errorDiv, message) => {
-    var errorDiv = document.getElementById(errorDiv);
+    errorDiv = document.getElementById(errorDiv);
     errorDiv.innerHTML = message;
 }

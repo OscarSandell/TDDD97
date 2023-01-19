@@ -119,3 +119,59 @@ img {
     overflow-wrap: break-word;
     text-align: center;
 }
+
+.home {
+    display: grid;
+    grid-template-columns: [first-col] 30% [second-col] 70%  [third-col]; 
+    grid-template-rows: [first-row] auto [second-row] auto [third-row];
+}
+
+.profileinfo {
+    grid-column-start: first-col;
+    grid-column-end: second-col;
+    grid-row-start: first-row;
+    grid-row-end: second-row;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.post {
+    grid-column-start: second-col;
+    grid-column-end: third-col;
+    grid-row-start: first-row;
+    grid-row-end: second-row;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.wall {
+    grid-column-start: first-col;
+    grid-column-end: span third-col;
+    grid-row-start: second-row;
+    grid-row-end: third-row;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.postarea {
+    height: 100%;
+    resize: none;
+}
+
+.wallmessages{
+    list-style-type: none;
+    margin: 10px;
+    padding: 0;
+}
+
+.wallmessage{
+    /* border-style: solid;
+    border-width: 2px;
+    border-radius: 25%; */
+    overflow-wrap: break-word;
+}
+
+#messageWriter{
+
+    border-bottom: 2px solid ;
+}

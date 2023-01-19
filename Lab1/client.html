@@ -109,7 +109,32 @@
     </script>
 
     <script type="text/content" id="Home">
-        This is the home content!
+        <div class="home">
+            <div class="profileinfo">
+                <div id="profileinfo" class="rows" style="background-color:Red">
+                    <p id="profilefirstname">firstname</p>
+                    <p id="profilefamilyname">familyname</p>
+                    <p id="profilegender">gender</p>
+                    <p id="profileemail">email</p>
+                    <p id="profilecity">city</p>
+                    <p id="profilecountry">country</p>
+                </div>
+            </div>
+            <div class="post" style="background-color:green">
+                <form onSubmit="newPost(); return false">
+                    <label for="postarea">New Post:</label>
+                    <textarea class="postarea" id="postarea" name="postarea"></textarea>
+
+                    <input type="submit" value="Post">
+                </form>
+            </div>
+            <div class="wall" style="background-color:orange">
+                <button type="button" onClick="updateWall();return false" >Refresh</button>
+                <ul id="messages" class="wallmessages">
+                    
+                </ul>
+            </div>
+        </div>
     </script>
     <script type="text/content" id="Browse">
         This is the browse content!
@@ -145,7 +170,7 @@
 
 <body>
     <div id="view">
-        
+
     </div>
     
 </body>
