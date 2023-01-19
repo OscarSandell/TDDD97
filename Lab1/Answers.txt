@@ -2,4 +2,51 @@
 server by making it do all of the validation. 
 We get a faster backend but we lose performance in frontend
 
-2. 
+2. Access tokens are seen as quite secure, it is generated on
+ the serverside using an encryption key which makes it secure
+ but also creates overhead and can make applications slow. However
+ whoever gets hold of your token can now access your account without
+ any restrictions, which ofcourse makes a man-in-the-middle attack 
+ very dangerous to token based authentication. 
+
+3. After having tried excessively to post JS-code into our posts,
+ we have noticed that here is no problem. It would impose a threat 
+ to the system if the script loaded into the post changed/accessed 
+ information on the current PC.
+ If it would be a problem for us we would simply validate all user
+ input before writing it to the page and remove tags such as <script> etc. 
+
+4.  Since the website we have created is a single-page application, we will 
+ be taken to whatever site we had previously visited. Aka, not the previous tab,
+ the welcomeview or anything on our site. This is to be expected with a single-page
+ application. To "fix" this we would have to create different HTML files which we would
+ use references to navigate to using our implemented buttons. 
+
+5. We are taken to the homepage because we default to the homepage 
+ whenever the script is started, in the onload() function. This is ofcourse also expected.
+ It's also the reason why we're getting this behaviour. The token is 
+ saved localy so whenever we refresh the page, the logic is so that it
+ goes to the homepage if there is a token onload()
+
+6. It could be a good idea because it would mean less html code for us to
+ load in the begining (faster initial load). Also there's less "waste" since the user may not visit 
+ all the views that are declared in client.html during his/her's session and can be insted
+ served up on demand to the user by the server when needed. 
+ A con would be that the server would have to load much more which is ofcurse unnecessary 
+ traffic for it to handle. 
+
+7. Insted of using bool's to inform the client about the servers success, statuscodes could be used.
+ This would then be more informative for the client. For example 404, which means that a resource is not found,
+ or 200 wich simply means success. 
+
+8. I believe that you can interscept the http file with html code and
+change the script to a script of your chosing that can circumvent the 
+checks that have been implemented by you and therefore access or send
+invalid data to the server. You should validate critical data on the
+server aswell.
+
+9.Tables are meant to display data. You should use divs instead with 
+ a combination of different display options in the CSS. This would make the site much more
+ responsive to resizing of windows etc. 
+
+10. 
