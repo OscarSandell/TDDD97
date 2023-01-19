@@ -111,25 +111,43 @@
     <script type="text/content" id="Home">
         <div class="home">
             <div class="profileinfo">
-                <div id="profileinfo" class="rows" style="background-color:Red">
-                    <p id="profilefirstname">firstname</p>
-                    <p id="profilefamilyname">familyname</p>
-                    <p id="profilegender">gender</p>
-                    <p id="profileemail">email</p>
-                    <p id="profilecity">city</p>
-                    <p id="profilecountry">country</p>
+                <div id="profileinfo" class="rows" >
+                    <div class="profileinfofield">
+                        <p>Firstname:</p>
+                        <p id="profilefirstname"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>Familyname:</p>
+                        <p id="profilefamilyname"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>Gender:</p>
+                        <p id="profilegender"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>Email:</p>
+                        <p id="profileemail"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>City:</p>
+                        <p id="profilecity"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>Country:</p>
+                        <p id="profilecountry"></p>
+                    </div>
                 </div>
             </div>
-            <div class="post" style="background-color:green">
-                <form onSubmit="newPost(); return false">
+            <div class="post">
+                <form onSubmit="newPost('home'); return false" >
                     <label for="postarea">New Post:</label>
                     <textarea class="postarea" id="postarea" name="postarea"></textarea>
 
                     <input type="submit" value="Post">
                 </form>
             </div>
-            <div class="wall" style="background-color:orange">
-                <button type="button" onClick="updateWall();return false" >Refresh</button>
+            <div class="wall" style="background-color:white">
+                <button type="button" onClick="updateWall('home');return false" >Refresh</button>
                 <ul id="messages" class="wallmessages">
                     
                 </ul>
@@ -137,7 +155,58 @@
         </div>
     </script>
     <script type="text/content" id="Browse">
-        This is the browse content!
+        <div class="browse">
+            <div class="searchBar">
+                <form onSubmit="browseUser(); return false">
+                    <label for="LookupUser">User Email:</label>
+                    <input name="LookupUser" id="LookupUser" type="email" required>
+                    <input type="submit" value="Find User!">
+                </form>
+                <span id="searchError"></span>
+            </div>
+            <div class="profileinfo" id="browseprofileinfo" style="background-color:Red">
+                <div id="profileinfo" class="rows" >
+                    <div class="profileinfofield">
+                        <p>firstname</p>
+                        <p id="profilefirstname"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>familyname</p>
+                        <p id="profilefamilyname"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>gender</p>
+                        <p id="profilegender"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>email</p>
+                        <p id="profileemail"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>city</p>
+                        <p id="profilecity"></p>
+                    </div>
+                    <div class="profileinfofield">
+                        <p>country</p>
+                        <p id="profilecountry"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="post" id="browsepost" style="background-color:green">
+                <form onSubmit="newPost('browse'); return false">
+                    <label for="postarea">New Post:</label>
+                    <textarea class="postarea" id="postarea" name="postarea"></textarea>
+
+                    <input type="submit" value="Post">
+                </form>
+            </div>
+            <div class="wall" id="browsewall" style="background-color:orange">
+                <button type="button" onClick="updateWall('browse');return false">Refresh</button>
+                <ul id="messages" class="wallmessages">
+
+                </ul>
+            </div>
+        </div>
     </script>
     <script type="text/content" id="Account">
         <div class="changePassword">
@@ -172,7 +241,8 @@
     <div id="view">
 
     </div>
-    
+
+
 </body>
 
 </html>

@@ -1,0 +1,5 @@
+1. Because we dont want to throttle the 
+server by making it do all of the validation. 
+We get a faster backend but we lose performance in frontend
+
+2. 
