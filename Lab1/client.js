@@ -284,7 +284,7 @@ validateLogin = () => {
     //Actually try to login
     let response_from_server = serverstub.signIn(username.value, password.value);
     if (!response_from_server.success) {
-        displayErrorMessage("logginError", response_from_server.message);
+        displayErrorMessage("loginError", response_from_server.message);
         return;
     }
 
